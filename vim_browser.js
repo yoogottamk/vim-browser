@@ -1,4 +1,5 @@
 (function() {
+    "use strict";
 
     let checkLoaded, scrollActive,
         scrollAmountVertical = 40, scrollAmountHorizontal = 20, 
