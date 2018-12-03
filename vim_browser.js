@@ -46,19 +46,26 @@
         let key = e.key
         activeKeys[key] = 1
 
+        if(key == 'G')
+            window.scrollBy(0, 99999999)
+
         if(_2keyCommand) {
+
             if(key == 'g')
                 window.scrollBy(0, -99999999)
 
             _2keyCommand = 0
+
         } else {
+
             if(scrollAmountVertical < 180)
                 scrollAmountVertical += 10
 
             if(key == 'g') {
                 _2keyCommand = 1
-                setTimeout(function() { _2keyCommand = 0 }, _2KeyTimeout)
+                setTimeout(() => { _2keyCommand = 0 }, _2KeyTimeout)
             }
+
         }
 
     }
