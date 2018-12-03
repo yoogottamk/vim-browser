@@ -1,6 +1,6 @@
 (function() {
 
-    let checkLoaded,
+    let checkLoaded, scrollActive
         scrollAmountVertical = 40, scrollAmountHorizontal = 20, 
         _2keyCommand = 0, _2KeyTimeout = 1000,
         activeKeys = {};
@@ -34,8 +34,6 @@
 
     let main = () => {
 
-        setInterval(scrollLikeVim, 100)
-
         document.body.addEventListener("keydown", register)
         document.body.addEventListener("keyup", unRegister)
 
@@ -68,6 +66,9 @@
 
         }
 
+        if(!scrollActive)
+            scrollActive = setInterval(scrollLikeVim, 100)
+
     }
 
     let unRegister = e => {
@@ -76,6 +77,9 @@
         activeKeys[key] = 0
 
         scrollAmountVertical = 40
+
+        clearInterval(scrollActive)
+        scrollActive = false
 
     }
 
