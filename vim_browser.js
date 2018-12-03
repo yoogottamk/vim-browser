@@ -1,6 +1,6 @@
 (function() {
 
-    let checkLoaded,
+    let checkLoaded, scrollActive,
         scrollAmountVertical = 40, scrollAmountHorizontal = 20, 
         _2keyCommand = 0, _2KeyTimeout = 1000,
         activeKeys = {};
@@ -34,8 +34,6 @@
 
     let main = () => {
 
-        setInterval(scrollLikeVim, 100)
-
         document.body.addEventListener("keydown", register)
         document.body.addEventListener("keyup", unRegister)
 
@@ -47,12 +45,12 @@
         activeKeys[key] = 1
 
         if(key == 'G')
-            window.scrollBy(0, 99999999)
+            window.scrollBy({ left: 0, top: 99999999, behavior: 'smooth' })
 
         if(_2keyCommand) {
 
             if(key == 'g')
-                window.scrollBy(0, -99999999)
+                window.scrollBy({ left: 0, top: -99999999, behavior: 'smooth' })
 
             _2keyCommand = 0
 
@@ -68,6 +66,9 @@
 
         }
 
+        if(!scrollActive)
+            scrollActive = setInterval(scrollLikeVim, 100)
+
     }
 
     let unRegister = e => {
@@ -76,6 +77,9 @@
         activeKeys[key] = 0
 
         scrollAmountVertical = 40
+
+        clearInterval(scrollActive)
+        scrollActive = false
 
     }
 
