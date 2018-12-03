@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "vim_browser",
+    "version": "1.0",
+    "description": "Adds the basic vim motions to the browser",
+
+    "icons": {
+        "48": "icons/icon_48.png",
+        "96": "icons/icon_96.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://*/"],
+            "js": ["vim_browser.js"]
+        }
+    ],
+
+    "background": {
+        "scripts": ["vim_browser.js"],
+        "persistent": true
+    }
+}
