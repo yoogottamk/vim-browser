@@ -45,12 +45,12 @@
         activeKeys[key] = 1
 
         if(key == 'G')
-            window.scrollBy(0, 99999999)
+            window.scrollBy({ left: 0, top: 99999999, behavior: 'smooth' })
 
         if(_2keyCommand) {
 
             if(key == 'g')
-                window.scrollBy(0, -99999999)
+                window.scrollBy({ left: 0, top: -99999999, behavior: 'smooth' })
 
             _2keyCommand = 0
 
