@@ -1,6 +1,6 @@
 (function() {
 
-    let checkLoaded, scrollActive
+    let checkLoaded, scrollActive,
         scrollAmountVertical = 40, scrollAmountHorizontal = 20, 
         _2keyCommand = 0, _2KeyTimeout = 1000,
         activeKeys = {};
