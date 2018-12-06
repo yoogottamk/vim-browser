@@ -1,8 +1,10 @@
 (function() {
+
     "use strict";
 
     let checkLoaded, scrollActive,
-        scrollAmountVertical = 40, scrollAmountHorizontal = 20, 
+        inputFieldActive = false,
+        scrollAmountVertical = 40, scrollAmountHorizontal = 20,
         _2keyCommand = 0, _2KeyTimeout = 1000,
         activeKeys = {};
 
@@ -18,6 +20,11 @@
     checkLoaded = setInterval(checkDocumentLoaded, 100)
 
     let scrollLikeVim = () => {
+
+        if(inputFieldActive) {
+            inputFieldActive = false
+            return
+        }
 
         if(activeKeys['k'] == 1)
             window.scrollBy(0, -scrollAmountVertical)
@@ -35,12 +42,21 @@
 
     let main = () => {
 
+        document.body.addEventListener("input", blockScroll)
         document.body.addEventListener("keydown", register)
         document.body.addEventListener("keyup", unRegister)
+    }
 
+    let blockScroll = e => {
+        inputFieldActive = true
     }
 
     let register = e => {
+
+        if(inputFieldActive) {
+            inputFieldActive = false
+            return
+        }
 
         let key = e.key
         activeKeys[key] = 1
