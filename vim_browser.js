@@ -44,9 +44,17 @@
     const isInputFieldActive = () => {
 
         let activeElement = document.activeElement;
-        let inputFields = [ 'input', 'select', 'button', 'textarea' ];
+        let tagName = activeElement.tagName.toLowerCase();
 
-        return (activeElement && inputFields.indexOf(activeElement.tagName.toLowerCase()) !== -1)
+        if (tagName === 'textarea')
+            return true
+
+        if (tagName !== 'input')
+            return false
+
+        let inputFields = ['text', 'password', 'number', 'email', 'tel', 'url', 'search', 'date', 'datetime', 'datetime-local', 'time', 'month', 'week']
+
+        return inputFields.indexOf(activeElemen.type) >= 0;
 
     }
 
