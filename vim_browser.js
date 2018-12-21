@@ -7,7 +7,7 @@
         _2keyCommand = 0, _2KeyTimeout = 1000,
         activeKeys = {};
 
-    let checkDocumentLoaded = () => {
+    const checkDocumentLoaded = () => {
 
         if(document.readyState === 'complete') {
             clearInterval(checkLoaded)
@@ -18,7 +18,7 @@
 
     checkLoaded = setInterval(checkDocumentLoaded, 100)
 
-    let scrollLikeVim = () => {
+    const scrollLikeVim = () => {
 
         if(activeKeys['k'] == 1)
             window.scrollBy(0, -scrollAmountVertical)
@@ -34,14 +34,14 @@
 
     }
 
-    let main = () => {
+    const main = () => {
 
         document.body.addEventListener("keydown", register)
         document.body.addEventListener("keyup", unRegister)
 
     }
 
-    let isInputFieldActive = () => {
+    const isInputFieldActive = () => {
 
         let activeElement = document.activeElement;
         let inputFields = [ 'input', 'select', 'button', 'textarea' ];
@@ -50,7 +50,7 @@
 
     }
 
-    let register = e => {
+    const register = e => {
 
         if(isInputFieldActive())
             return
@@ -85,7 +85,7 @@
 
     }
 
-    let unRegister = e => {
+    const unRegister = e => {
 
         let key = e.key
         activeKeys[key] = 0
