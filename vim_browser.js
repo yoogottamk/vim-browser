@@ -58,12 +58,33 @@
 
     }
 
+    const isValidKey = key => {
+
+        let implementedKeys = ['h', 'j', 'k', 'l', 'g', 'G']
+
+        return implementedKeys.indexOf(key) >= 0
+
+    }
+
+    const blockSiteShortcuts = e => {
+
+        e.cancelBubble = true
+        e.stopImmediatePropagation()
+
+    }
+
     const register = e => {
 
         if(isInputFieldActive())
             return
 
         let key = e.key
+
+        if(isValidKey(key))
+            blockSiteShortcuts(e)
+        else
+            return
+
         activeKeys[key] = 1
 
         if(key == 'G')
