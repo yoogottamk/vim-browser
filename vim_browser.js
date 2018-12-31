@@ -10,34 +10,34 @@
     const checkDocumentLoaded = () => {
 
         if(document.readyState === 'complete') {
-            clearInterval(checkLoaded)
-            main()
+            clearInterval(checkLoaded);
+            main();
         }
 
     }
 
-    checkLoaded = setInterval(checkDocumentLoaded, 100)
+    checkLoaded = setInterval(checkDocumentLoaded, 100);
 
     const scrollLikeVim = () => {
 
         if(activeKeys['k'] == 1)
-            window.scrollBy(0, -scrollAmountVertical)
+            window.scrollBy(0, -scrollAmountVertical);
 
         if(activeKeys['j'] == 1)
-            window.scrollBy(0, scrollAmountVertical)
+            window.scrollBy(0, scrollAmountVertical);
 
         if(activeKeys['h'] == 1)
-            window.scrollBy(-scrollAmountHorizontal, 0)
+            window.scrollBy(-scrollAmountHorizontal, 0);
 
         if(activeKeys['l'] == 1)
-            window.scrollBy(scrollAmountHorizontal, 0)
+            window.scrollBy(scrollAmountHorizontal, 0);
 
     }
 
     const main = () => {
 
-        document.body.addEventListener("keydown", register)
-        document.body.addEventListener("keyup", unRegister)
+        document.body.addEventListener("keydown", register);
+        document.body.addEventListener("keyup", unRegister);
 
     }
 
@@ -47,12 +47,17 @@
         let tagName = activeElement.tagName.toLowerCase();
 
         if (tagName === 'textarea')
-            return true
+            return true;
 
         if (tagName !== 'input')
-            return false
+            return false;
 
-        let inputFields = ['text', 'password', 'number', 'email', 'tel', 'url', 'search', 'date', 'datetime', 'datetime-local', 'time', 'month', 'week']
+        let inputFields = [
+            'text', 'password', 'number',
+            'email', 'tel', 'url',
+            'search', 'date', 'datetime',
+            'datetime-local', 'time', 'month', 'week'
+        ];
 
         return inputFields.indexOf(activeElement.type) >= 0;
 
@@ -60,69 +65,69 @@
 
     const isValidKey = key => {
 
-        let implementedKeys = ['h', 'j', 'k', 'l', 'g', 'G']
+        let implementedKeys = ['h', 'j', 'k', 'l', 'g', 'G'];
 
-        return implementedKeys.indexOf(key) >= 0
+        return implementedKeys.indexOf(key) >= 0;
 
     }
 
     const blockSiteShortcuts = e => {
 
-        e.cancelBubble = true
-        e.stopImmediatePropagation()
+        e.cancelBubble = true;
+        e.stopImmediatePropagation();
 
     }
 
     const register = e => {
 
         if(isInputFieldActive())
-            return
+            return;
 
-        let key = e.key
+        let key = e.key;
 
         if(isValidKey(key))
-            blockSiteShortcuts(e)
+            blockSiteShortcuts(e);
         else
-            return
+            return;
 
-        activeKeys[key] = 1
+        activeKeys[key] = 1;
 
         if(key == 'G')
-            window.scrollBy({ left: 0, top: 99999999, behavior: 'smooth' })
+            window.scrollBy({ left: 0, top: 99999999, behavior: 'smooth' });
 
         if(_2keyCommand) {
 
             if(key == 'g')
-                window.scrollBy({ left: 0, top: -99999999, behavior: 'smooth' })
+                window.scrollBy({ left: 0, top: -99999999, behavior: 'smooth' });
 
-            _2keyCommand = 0
+            _2keyCommand = 0;
 
         } else {
 
             if(scrollAmountVertical < 180)
-                scrollAmountVertical += 10
+                scrollAmountVertical += 10;
 
             if(key == 'g') {
-                _2keyCommand = 1
-                setTimeout(() => { _2keyCommand = 0 }, _2KeyTimeout)
+                _2keyCommand = 1;
+                setTimeout(() => { _2keyCommand = 0 }, _2KeyTimeout);
             }
 
         }
 
         if(!scrollActive)
-            scrollActive = setInterval(scrollLikeVim, 100)
+            scrollActive = setInterval(scrollLikeVim, 100);
 
     }
 
     const unRegister = e => {
 
-        let key = e.key
-        activeKeys[key] = 0
+        let key = e.key;
+        activeKeys[key] = 0;
 
-        scrollAmountVertical = 40
+        scrollAmountVertical = 40;
 
-        clearInterval(scrollActive)
-        scrollActive = false
+        clearInterval(scrollActive);
+        scrollActive = false;
 
     }
 
