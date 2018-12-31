@@ -54,7 +54,7 @@
 
         let inputFields = ['text', 'password', 'number', 'email', 'tel', 'url', 'search', 'date', 'datetime', 'datetime-local', 'time', 'month', 'week']
 
-        return inputFields.indexOf(activeElemen.type) >= 0;
+        return inputFields.indexOf(activeElement.type) >= 0;
 
     }
 
